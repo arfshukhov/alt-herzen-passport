@@ -1,11 +1,4 @@
-import json
-import os
-
-from backend.middleware.users_middleware import UserWriter, UserReader
-from backend.middleware.validator import Email, Password, FullName
-from backend.settings import ServerSettings
-
-from routes.users import *
+from .routes.users import *
 
 @app.route('/')
 def hello_world():  # put application's code here
@@ -13,4 +6,4 @@ def hello_world():  # put application's code here
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5678, debug=True)
+    app.run(host=ServerSettings.HOST, port=ServerSettings.PORT, debug=True)

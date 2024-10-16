@@ -1,6 +1,7 @@
-from typing import Union, Any, override
-import re
 import hashlib
+import re
+from typing import Union, Any, override
+
 
 class Validator:
     """

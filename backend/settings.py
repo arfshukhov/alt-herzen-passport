@@ -10,6 +10,8 @@ import os
 class ServerSettings:
     ENVIRONMENT = os.getenv('ENVIRONMENT', 'local')
     API_PATH = os.getenv('API_TAIL', "/api/v1")
+    HOST = os.getenv('HOST', '0.0.0.0')
+    PORT = os.getenv('PORT', 8888)
 
 class DBSettings:
     """

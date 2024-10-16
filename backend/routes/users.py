@@ -2,9 +2,11 @@ import json
 
 from flask import jsonify
 
-from backend.middleware.users_middleware import UserWriter
-from backend.origin import app, request
-from backend.settings import ServerSettings
+from ..middleware.users_middleware import UserWriter
+from ..origin import (
+    app, request
+)
+from ..settings import ServerSettings
 
 
 @app.route(f"{ServerSettings.API_PATH}/users", methods=["post"])

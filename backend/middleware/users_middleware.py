@@ -1,8 +1,8 @@
 import json
 from typing import *
 
-from backend.middleware.validator import Email, FullName, Password
-from backend.models import Users
+from ..middleware.validator import Email, FullName, Password
+from ..models import Users
 
 
 class UserReader:

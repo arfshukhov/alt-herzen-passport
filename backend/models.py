@@ -1,8 +1,6 @@
 from peewee import *
 
-
-from settings import DBSettings
-
+from .settings import DBSettings
 
 """
 для локального запуска удобнее исользовать SQLite
