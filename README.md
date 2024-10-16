@@ -23,3 +23,4 @@ DB_PASSWORD   | 12345678
 DB_USER       | postgres
 DB_NAME       | postgres
 DB_KIND       | sqlite
+SECRET_KEY    |*сгенерируется при исполнении*
