@@ -7,9 +7,9 @@ import os
 
 """
 
-class EnvironmentSettings:
+class ServerSettings:
     ENVIRONMENT = os.getenv('ENVIRONMENT', 'local')
-
+    API_TAIL = os.getenv('API_TAIL', "/api/v1")
 
 class DBSettings:
     """
@@ -32,7 +32,7 @@ class DBSettings:
         """
         uri: str = f"postgresql+psycopg://{cls.DB_USER}:{cls.DB_PASSWORD}"\
                f"@{cls.DB_HOST}:{cls.DB_PORT}/{cls.DB_NAME}"
-        if EnvironmentSettings.ENVIRONMENT != 'local':
+        if ServerSettings.ENVIRONMENT != 'local':
             uri += "?sslmode=require"
         return uri
 
