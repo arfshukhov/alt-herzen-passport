@@ -74,7 +74,8 @@ class UserWriter:
                 "is_active":bool(self.data["is_active"]),
                 "is_superuser":bool(self.data["is_superuser"]),
                 "full_name":self.data["full_name"],
-                "id":int(Users.select().where(Users.email == self.data["email"]).first().id) }, 200]
+                "id":UserReader(email=self.data["email"]).get},
+                200]
             )
 
 

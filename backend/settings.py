@@ -9,7 +9,7 @@ import os
 
 class ServerSettings:
     ENVIRONMENT = os.getenv('ENVIRONMENT', 'local')
-    API_TAIL = os.getenv('API_TAIL', "/api/v1")
+    API_PATH = os.getenv('API_TAIL', "/api/v1")
 
 class DBSettings:
     """
