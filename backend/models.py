@@ -10,7 +10,7 @@ from .settings import DBSettings
 'sqlite'
 """
 if DBSettings.DB_KIND == "sqlite":
-    db = SqliteDatabase(DBSettings.DB_NAME+".db")
+    db = SqliteDatabase("backend/"+DBSettings.DB_NAME+".db")
 else:
     db = PostgresqlDatabase(DBSettings.uri)
 
@@ -49,7 +49,8 @@ class Institutes(Model):
 class Groups(Model):
     id = IntegerField(unique=True, primary_key=True)
     institute_id = ForeignKeyField(Institutes, backref="groups")
-    name = TextField()
+    course = IntegerField()
+    name = TextField(unique=True)
 
     class Meta:
         database = db
@@ -67,6 +68,7 @@ class Students(Model):
     first_name = TextField()
     last_name = TextField()
     birth_date = DateField()
+    birth_place = TextField()
     email = TextField()
     phone_number = TextField(unique=True)
     sex = TextField()
@@ -75,11 +77,22 @@ class Students(Model):
     admission_year = IntegerField()
     weight = IntegerField()
     height = IntegerField()
+    patronymic = TextField()
 
     class Meta:
         database = db
         db_table = "students"
 
+
+class BaseGTO(Model):
+    id = ForeignKeyField(Students, backref="gto", primary_key=True)
+    level = CharField()
+
+    class Meta:
+        database = db
+        db_table = "gto"
+
+
 with db:
-    db.create_tables([Users, Institutes, Groups, Students])
+    db.create_tables([Users, Institutes, Groups, Students, BaseGTO])
 

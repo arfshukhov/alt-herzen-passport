@@ -1,4 +1,5 @@
 import os
+import uuid
 
 """
 
@@ -9,9 +10,11 @@ import os
 
 class ServerSettings:
     ENVIRONMENT = os.getenv('ENVIRONMENT', 'local')
-    API_PATH = os.getenv('API_TAIL', "/api/v1")
-    HOST = os.getenv('HOST', '0.0.0.0')
+    API_PATH = os.getenv('API_PATH', "/api/v1")
+    HOST = os.getenv('HOST', '127.0.0.1')
     PORT = os.getenv('PORT', 8888)
+    SECRET_KEY = os.getenv('SECRET_KEY', str(uuid.uuid4().hex))
+
 
 class DBSettings:
     """

@@ -1,8 +1,9 @@
 from .routes.users import *
+from .routes.institutes import *
 
-@app.route('/')
+@app.route(ServerSettings.API_PATH, methods=['GET'])
 def hello_world():  # put application's code here
-    return 'Hello World!'
+    return "it's API"
 
 
 if __name__ == '__main__':
