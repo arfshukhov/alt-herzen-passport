@@ -1,6 +1,8 @@
 import json
 from typing import *
 
+from peewee import DoesNotExist
+
 from backend.models import Institutes
 
 
@@ -13,9 +15,9 @@ class InstitutesReader:
     """
     def __init__(self,
                  _id: int):
-        if _id:
+        try:
             self.institute = Institutes.select().where(Institutes.id == _id).get()
-        else:
+        except DoesNotExist:
             self.institute = None
 
 
@@ -44,7 +46,7 @@ class InstitutesList:
         Если института с таким ID не сущесвтует,
         он просто не заносит его в список
         """
-        for i in range(self.skip, self.limit+1):
+        for i in range(self.skip+1, self.limit+self.limit+2):
             institute = InstitutesReader(_id=i).get
             if institute:
                 self.institutes_list.append(institute)

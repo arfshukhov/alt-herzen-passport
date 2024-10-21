@@ -1,12 +1,17 @@
 import os
 import uuid
 
+import dotenv
+
+
 """
 
 В этом файле будут храниться константы
 для подключения к БД и другие технические данные настройки
 
 """
+
+dotenv.load_dotenv()
 
 class ServerSettings:
     ENVIRONMENT = os.getenv('ENVIRONMENT', 'local')

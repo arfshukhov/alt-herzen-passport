@@ -1,6 +1,6 @@
 from ..middleware.institute_middleware import InstitutesList
 from ..origin import (
-    app, request, jsonify
+    app, request, jsonify, traceback
 )
 from ..settings import ServerSettings
 
@@ -16,16 +16,15 @@ def get_institutes():
             "count": len(institutes)
         }
         return jsonify(res), 200
-    except Exception:
+    except Exception as e:
         return jsonify({
-                "detail": [
-                    {
-                        "loc": [
-                            "string",
-                            0
-                        ],
-                        "msg": "invalid data",
-                        "type": "string"
-                    }
-                ]
+            "detail": [{
+                "loc": [
+                    f"{e.__class__.__name__}",
+                    0
+                ],
+                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
+                       f"{traceback.format_exc()}",
+                "type": f"{e.__class__.__name__}"
+            }]
         }), 422

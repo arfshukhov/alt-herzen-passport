@@ -48,7 +48,7 @@ class Institutes(Model):
 """
 class Groups(Model):
     id = IntegerField(unique=True, primary_key=True)
-    institute_id = ForeignKeyField(Institutes, backref="groups")
+    institute_id = ForeignKeyField(Institutes, backref="groups", field='id')
     course = IntegerField()
     name = TextField(unique=True)
 
@@ -62,14 +62,14 @@ class Groups(Model):
 """
 class Students(Model):
     id = IntegerField(unique=True, primary_key=True)
-    institute_id = ForeignKeyField(Institutes, backref="students")
-    group_id = ForeignKeyField(Groups, backref="students")
+    institute_id = ForeignKeyField(Institutes, backref="students", field='id')
+    group_id = ForeignKeyField(Groups, backref="students", field='id')
     course = IntegerField()
     first_name = TextField()
     last_name = TextField()
     birth_date = DateField()
     birth_place = TextField()
-    email = TextField()
+    email = TextField(unique=True)
     phone_number = TextField(unique=True)
     sex = TextField()
     medical_group = TextField()
@@ -85,8 +85,9 @@ class Students(Model):
 
 
 class BaseGTO(Model):
-    id = ForeignKeyField(Students, backref="gto", primary_key=True)
+    student_id = ForeignKeyField(Students, backref="gto", field='id')
     level = CharField()
+    year = IntegerField()
 
     class Meta:
         database = db
