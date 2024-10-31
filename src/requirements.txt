@@ -1,6 +1,6 @@
 flask-cors
 flask
-peewee
+SQLAlchemy
 gunicorn
 PyJWT
 python-dotenv

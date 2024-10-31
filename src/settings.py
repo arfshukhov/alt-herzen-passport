@@ -23,6 +23,9 @@ class ServerSettings:
     HOST = os.getenv('HOST', '127.0.0.1')
     PORT = os.getenv('PORT', 8888)
     SECRET_KEY = os.getenv('SECRET_KEY') #str(uuid.uuid4().hex)
+    SUPERUSER_EMAIL = os.getenv('SUPERUSER_EMAIL')
+    SUPERUSER_PASSWORD = os.getenv('SUPERUSER_PASSWORD')
+    SUPERUSER_FULL_NAME = os.getenv('SUPERUSER_FULL_NAME')
 
 
 class DBSettings:

@@ -1,0 +1,900 @@
+ERROR:health-passport:Exception on /api/v1/groups [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/groups.py", line 20, in get_groups
+    ).get
+      ^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/groups_middleware.py", line 58, in get
+    self._make_list()
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/groups_middleware.py", line 45, in _make_list
+    while (group := GroupsReader(_id).get) != None:
+                    ^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/groups_middleware.py", line 13, in __init__
+    self.institute = InstitutesReader(self.group["institute_id"]).get
+                                      ~~~~~~~~~~^^^^^^^^^^^^^^^^
+TypeError: 'Groups' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/groups.py", line 29, in get_groups
+    "msg": f"{e} {e.__annotations__} {e.__cause__}",
+                  ^^^^^^^^^^^^^^^^^
+AttributeError: 'TypeError' object has no attribute '__annotations__'
+ERROR:health-passport:Exception on /api/v1/groups [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 7285, in get
+    return clone.execute(database)[0]
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 4581, in __getitem__
+    return self.row_cache[item]
+           ~~~~~~~~~~~~~~^^^^^^
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/groups.py", line 22, in get_groups
+    ).get
+      ^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/groups_middleware.py", line 58, in get
+    self._make_list()
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/groups_middleware.py", line 45, in _make_list
+    while (group := GroupsReader(_id).get) != None:
+                    ^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/groups_middleware.py", line 11, in __init__
+    self.group = Groups.select().where(Groups.id == _id).get()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 7288, in get
+    raise self.model.DoesNotExist('%s instance matching query does '
+backend.models.GroupsDoesNotExist: <Model: Groups> instance matching query does not exist:
+SQL: SELECT "t1"."id", "t1"."institute_id", "t1"."course", "t1"."name" FROM "groups" AS "t1" WHERE ("t1"."id" = ?) LIMIT ? OFFSET ?
+Params: [3, 1, 0]
+INFO:root:[]
+INFO:root:[]
+INFO:root:{'id': 1, 'name': 'ИСиТ', 'course': 1, 'institute_id': <Institutes: 1>, 'institute': {'name': 'ИИТТО', 'id': 1}}
+INFO:root:{'id': 1, 'name': 'ИСиТ', 'course': 1, 'institute_id': 1, 'institute': {'name': 'ИИТТО', 'id': 1}}
+INFO:root:{'id': 1, 'name': 'ИСиТ', 'course': 1, 'institute_id': 1, 'institute': {'name': 'ИИТТО', 'id': 1}}
+ERROR:health-passport:Exception on /api/v1/gto [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_gto() missing 1 required positional argument: 'institute_name'
+ERROR:root:Object of type Groups is not JSON serializable
+ERROR:health-passport:Exception on /api/v1/login/access-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 7285, in get
+    return clone.execute(database)[0]
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 4581, in __getitem__
+    return self.row_cache[item]
+           ~~~~~~~~~~~~~~^^^^^^
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/login.py", line 14, in access_token
+    if PasswordMatcher.match_password(password, email):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 17, in match_password
+    account = Users.select().where(Users.email == email).get()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 7288, in get
+    raise self.model.DoesNotExist('%s instance matching query does '
+backend.models.UsersDoesNotExist: <Model: Users> instance matching query does not exist:
+SQL: SELECT "t1"."id", "t1"."email", "t1"."is_active", "t1"."password_hash", "t1"."full_name", "t1"."is_superuser" FROM "users" AS "t1" WHERE ("t1"."email" = ?) LIMIT ? OFFSET ?
+Params: ['12345678', 1, 0]
+ERROR:health-passport:Exception on /api/v1/login/access-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 7285, in get
+    return clone.execute(database)[0]
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 4581, in __getitem__
+    return self.row_cache[item]
+           ~~~~~~~~~~~~~~^^^^^^
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/login.py", line 14, in access_token
+    if PasswordMatcher.match_password(password, email):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 17, in match_password
+    account = Users.select().where(Users.email == email).get()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 7288, in get
+    raise self.model.DoesNotExist('%s instance matching query does '
+backend.models.UsersDoesNotExist: <Model: Users> instance matching query does not exist:
+SQL: SELECT "t1"."id", "t1"."email", "t1"."is_active", "t1"."password_hash", "t1"."full_name", "t1"."is_superuser" FROM "users" AS "t1" WHERE ("t1"."email" = ?) LIMIT ? OFFSET ?
+Params: ['12345678', 1, 0]
+ERROR:health-passport:Exception on /api/v1/login/access-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 7285, in get
+    return clone.execute(database)[0]
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 4581, in __getitem__
+    return self.row_cache[item]
+           ~~~~~~~~~~~~~~^^^^^^
+IndexError: list index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/login.py", line 14, in access_token
+    if PasswordMatcher.match_password(password, email):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 17, in match_password
+    account = Users.select().where(Users.email == email).get()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/peewee.py", line 7288, in get
+    raise self.model.DoesNotExist('%s instance matching query does '
+backend.models.UsersDoesNotExist: <Model: Users> instance matching query does not exist:
+SQL: SELECT "t1"."id", "t1"."email", "t1"."is_active", "t1"."password_hash", "t1"."full_name", "t1"."is_superuser" FROM "users" AS "t1" WHERE ("t1"."email" = ?) LIMIT ? OFFSET ?
+Params: ['12345678', 1, 0]
+ERROR:health-passport:Exception on /api/v1/login/access-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/login.py", line 14, in access_token
+    if PasswordMatcher.match_password(email,password):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 19, in match_password
+    if account.password_hash == crypto.encrypt(password):
+       ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'password_hash'
+ERROR:health-passport:Exception on /api/v1/login/access-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/login.py", line 14, in access_token
+    if PasswordMatcher.match_password(email, password):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 19, in match_password
+    if account["password_hash"] == crypto.encrypt(password):
+       ~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'password_hash'
+ERROR:health-passport:Exception on /api/v1/login/access-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/login.py", line 15, in access_token
+    token = Token(email).get_token
+            ^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 32, in __init__
+    self.token = self.make(self.email)
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 45, in make
+    jwt_token = jwt.encode({
+                ^^^^^^^^^^
+AttributeError: module 'jwt' has no attribute 'encode'
+ERROR:health-passport:Exception on /api/v1/login/access-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/login.py", line 15, in access_token
+    token = Token(email).get_token
+            ^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 32, in __init__
+    self.token = self.make(self.email)
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 45, in make
+    jwt_token = jwt.encode({
+                ^^^^^^^^^^
+AttributeError: module 'jwt' has no attribute 'encode'
+ERROR:health-passport:Exception on /api/v1/login/test-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 269, in _load
+    header = json.loads(header_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py", line 341, in loads
+    s = s.decode(detect_encoding(s), 'surrogatepass')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x88 in position 6: invalid start byte
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 66, in wrapper
+    token_status = Token.verify_token(request.headers["Authorization"].split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 55, in verify_token
+    data = jwt.decode(token, ServerSettings.SECRET_KEY, algorithms=['HS256'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 211, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 152, in decode_complete
+    decoded = api_jws.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 199, in decode_complete
+    payload, signing_input, header, signature = self._load(jwt)
+                                                ^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 271, in _load
+    raise DecodeError(f"Invalid header string: {e}") from e
+jwt.exceptions.DecodeError: Invalid header string: 'utf-8' codec can't decode byte 0x88 in position 6: invalid start byte
+ERROR:health-passport:Exception on /api/v1/login/test-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 69, in wrapper
+    return func(email=token_status["email"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/routes/login.py", line 37, in test_token
+    return jsonify({user}), 200
+                   ^^^^^^
+TypeError: unhashable type: 'dict'
+ERROR:health-passport:Exception on /api/v1/login/test-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 66, in wrapper
+    token_status = Token.verify_token(request.headers["Authorization"].split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 55, in verify_token
+    data = jwt.decode(token, ServerSettings.SECRET_KEY, algorithms=['HS256'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 211, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 152, in decode_complete
+    decoded = api_jws.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 210, in decode_complete
+    self._verify_signature(signing_input, header, signature, key, algorithms)
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 317, in _verify_signature
+    raise InvalidSignatureError("Signature verification failed")
+jwt.exceptions.InvalidSignatureError: Signature verification failed
+ERROR:health-passport:Exception on /api/v1/login/test-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 68, in wrapper
+    token_status = Token.verify_token(request.headers["Authorization"].split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 57, in verify_token
+    data = jwt.decode(token, b64decode(ServerSettings.SECRET_KEY), algorithms=['HS256'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 211, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 152, in decode_complete
+    decoded = api_jws.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 210, in decode_complete
+    self._verify_signature(signing_input, header, signature, key, algorithms)
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 317, in _verify_signature
+    raise InvalidSignatureError("Signature verification failed")
+jwt.exceptions.InvalidSignatureError: Signature verification failed
+ERROR:health-passport:Exception on /api/v1/login/test-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 269, in _load
+    header = json.loads(header_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py", line 341, in loads
+    s = s.decode(detect_encoding(s), 'surrogatepass')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x88 in position 6: invalid start byte
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 68, in wrapper
+    token_status = Token.verify_token(request.headers["Authorization"].split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 57, in verify_token
+    data = jwt.decode(token, b64decode(ServerSettings.SECRET_KEY), algorithms=['HS256'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 211, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 152, in decode_complete
+    decoded = api_jws.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 199, in decode_complete
+    payload, signing_input, header, signature = self._load(jwt)
+                                                ^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 271, in _load
+    raise DecodeError(f"Invalid header string: {e}") from e
+jwt.exceptions.DecodeError: Invalid header string: 'utf-8' codec can't decode byte 0x88 in position 6: invalid start byte
+ERROR:health-passport:Exception on /api/v1/login/test-token [POST]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 269, in _load
+    header = json.loads(header_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py", line 341, in loads
+    s = s.decode(detect_encoding(s), 'surrogatepass')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x88 in position 6: invalid start byte
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 68, in wrapper
+    token_status = Token.verify_token(request.headers["Authorization"].split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 57, in verify_token
+    data = jwt.decode(token, ServerSettings.SECRET_KEY, algorithms=['HS256'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 211, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 152, in decode_complete
+    decoded = api_jws.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 199, in decode_complete
+    payload, signing_input, header, signature = self._load(jwt)
+                                                ^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 271, in _load
+    raise DecodeError(f"Invalid header string: {e}") from e
+jwt.exceptions.DecodeError: Invalid header string: 'utf-8' codec can't decode byte 0x88 in position 6: invalid start byte
+    ERROR:health-passport:Exception on /api/v1/users/ [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 269, in _load
+    header = json.loads(header_data)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/json/__init__.py", line 341, in loads
+    s = s.decode(detect_encoding(s), 'surrogatepass')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x88 in position 6: invalid start byte
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 71, in wrapper
+    token_status = Token.verify_token(request.headers["Authorization"].split()[1])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/middleware/JWT_processor.py", line 58, in verify_token
+    data = jwt.decode(token, ServerSettings.SECRET_KEY, algorithms=['HS256'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 211, in decode
+    decoded = self.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jwt.py", line 152, in decode_complete
+    decoded = api_jws.decode_complete(
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 199, in decode_complete
+    payload, signing_input, header, signature = self._load(jwt)
+                                                ^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jwt/api_jws.py", line 271, in _load
+    raise DecodeError(f"Invalid header string: {e}") from e
+jwt.exceptions.DecodeError: Invalid header string: 'utf-8' codec can't decode byte 0x88 in position 6: invalid start byte
+ERROR:health-passport:Exception on /api/v1/students/1 [PATCH]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 883, in full_dispatch_request
+    return self.finalize_request(rv)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 902, in finalize_request
+    response = self.make_response(rv)
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1174, in make_response
+    raise TypeError(
+TypeError: The view function for 'update_student' did not return a valid response. The function either returned None or ended without a return statement.
+ERROR:health-passport:Exception on /api/v1/docs [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/app.py", line 14, in hello_world
+    return render_template("..swagger/templates/swaggerui.html")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 1084, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 1013, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 972, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: ..swagger/templates/swaggerui.html
+ERROR:health-passport:Exception on /api/v1/docs [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/app.py", line 14, in hello_world
+    return render_template("..swagger/templates/swaggerui.html")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 1084, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 1013, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 972, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: ..swagger/templates/swaggerui.html
+ERROR:health-passport:Exception on /api/v1/docs [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/app.py", line 14, in hello_world
+    return render_template("swaggerui.html")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 1084, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 1013, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 972, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: swaggerui.html
+ERROR:health-passport:Exception on /api/v1/docs [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/backend/app.py", line 14, in hello_world
+    return render_template("swaggerui.html")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 1084, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 1013, in get_template
+    return self._load_template(name, globals)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/environment.py", line 972, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 65, in get_source
+    return self._get_source_fast(environment, template)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/templating.py", line 99, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: swaggerui.html
+ERROR:root:Mapper 'Mapper[Standard(standard)]' has no property 'results'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+ERROR:root:Mapper 'Mapper[StandardResults(standard_results)]' has no property 'students'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+ERROR:root:Mapper 'Mapper[StandardResults(standard_results)]' has no property 'students'.  If this property was indicated from other mappers or configure events, ensure registry.configure() has been called.
+ERROR:root:name 'NoResultFound' is not defined
+ERROR:root:(sqlite3.IntegrityError) UNIQUE constraint failed: students.phone_number
+[SQL: INSERT INTO students (institute_id, group_id, course, first_name, last_name, birth_date, birth_place, email, phone_number, sex, medical_group, address, admission_year, weight, height, patronymic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: (None, 1, None, 'Вася', 'Пупкин', '2020-10-12', 'где-то', 'aaa@rrt.re', '+79999999999', 'Мужской', 'Основная', 'там', 2024, 70, 170, 'Дрынич')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+ERROR:root:'NoneType' object has no attribute 'institute_id'
+ERROR:root:'NoneType' object has no attribute 'institute_id'
+ERROR:root:'NoneType' object has no attribute 'institute_id'
+ERROR:root:'NoneType' object has no attribute 'institute_id'
+ERROR:root:Multiple rows were found when exactly one was required
+ERROR:root:Could not determine join condition between parent/child tables on relationship Institutes.students - there are no foreign keys linking these tables.  Ensure that referencing columns are associated with a ForeignKey or ForeignKeyConstraint, or specify a 'primaryjoin' expression.
+ERROR:root:(sqlite3.IntegrityError) UNIQUE constraint failed: students.phone_number
+[SQL: INSERT INTO students (group_id, course, first_name, last_name, birth_date, birth_place, email, phone_number, sex, medical_group, address, admission_year, weight, height, patronymic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: (1, None, 'Вася', 'Пупкин', '2020-10-12', 'где-то', 'aaa@rrt.ry', '+79999999998', 'Мужской', 'Основная', 'там', 2024, 70, 170, 'Дрынич')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+ERROR:root:(sqlite3.IntegrityError) UNIQUE constraint failed: students.phone_number
+[SQL: INSERT INTO students (group_id, course, first_name, last_name, birth_date, birth_place, email, phone_number, sex, medical_group, address, admission_year, weight, height, patronymic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: (1, None, 'Вася', 'Пупкин', '2020-10-12', 'где-то', 'aaa@rrt.ry', '+79999999998', 'Мужской', 'Основная', 'там', 2024, 70, 170, 'Дрынич')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+ERROR:root:400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
+ERROR:health-passport:Exception on /api/v1/standard [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_standard() missing 1 required positional argument: '_email'
+ERROR:health-passport:Exception on /api/v1/standard [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_standard() missing 1 required positional argument: '_email'
+ERROR:health-passport:Exception on /api/v1/standard [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/decorator.py", line 130, in wrapped_function
+    resp = make_response(f(*args, **kwargs))
+                         ^^^^^^^^^^^^^^^^^^
+TypeError: get_standard() missing 1 required positional argument: '_email'
+ERROR:health-passport:Exception on /api/v1/standard [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/decorator.py", line 130, in wrapped_function
+    resp = make_response(f(*args, **kwargs))
+                         ^^^^^^^^^^^^^^^^^^
+TypeError: get_standard() missing 1 required positional argument: '_email'
+ERROR:health-passport:Exception on /api/v1/standard [GET]
+Traceback (most recent call last):
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+                                                ^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask/app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lvv20/PycharmProjects/backend-v2/.venv/lib/python3.12/site-packages/flask_cors/decorator.py", line 130, in wrapped_function
+    resp = make_response(f(*args, **kwargs))
+                         ^^^^^^^^^^^^^^^^^^
+TypeError: get_standard() missing 1 required positional argument: '_email'

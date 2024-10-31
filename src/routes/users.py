@@ -10,12 +10,13 @@ from ..middleware.users_middleware import (
     UserWriter, UsersList, UserReader
 )
 from ..origin import (
-    app, request, traceback
+    app, request, traceback, cross_origin
 )
 from ..settings import ServerSettings
 
 
 @app.route(f"{ServerSettings.API_PATH}/users", methods=["POST"])
+@cross_origin()
 @Token.token_required
 def create_user(*, _email):
     try:
@@ -68,6 +69,7 @@ def create_user(*, _email):
         }), 400
 
 @app.route(f"{ServerSettings.API_PATH}/users/", methods=["GET"])
+@cross_origin()
 @Token.token_required
 def get_users(*, _email):
     try:
@@ -126,6 +128,7 @@ def get_user(user_id, *, _email):
 
 
 @app.route(ServerSettings.API_PATH+"/users/open", methods=["POST"])
+@cross_origin()
 def create_user_open():
     try:
         email = request.args.get("email")
@@ -175,6 +178,7 @@ def create_user_open():
 
 
 @app.route(ServerSettings.API_PATH+"/users/me", methods=["PATCH"])
+@cross_origin()
 @Token.token_required
 def me_patching(*, _email):
 
@@ -213,12 +217,14 @@ def me_patching(*, _email):
         }), 422
 
 @app.route(ServerSettings.API_PATH+"/users/me", methods=["GET"])
+@cross_origin()
 @Token.token_required
 def get_me(*, _email):
     user = UserReader(email=_email).get
     return jsonify(user), 200
 
 @app.route(ServerSettings.API_PATH+"/users/me/password", methods=["PATCH"])
+@cross_origin()
 @Token.token_required
 def change_password(*, _email):
     try:
@@ -255,6 +261,7 @@ def change_password(*, _email):
 
 
 @app.route(ServerSettings.API_PATH+"/users/<int:user_id>", methods=["PATCH"])
+@cross_origin()
 @Token.token_required
 def update_user_by_id(user_id, *, _email):
     try:
@@ -301,6 +308,7 @@ def update_user_by_id(user_id, *, _email):
 
 
 @app.route(ServerSettings.API_PATH+"/users/<int:user_id>", methods=["DELETE"])
+@cross_origin()
 @Token.token_required
 def delete_user_by_id(user_id, *, _email):
     user_id = request.args.get("user_id")

@@ -1,5 +1,8 @@
+from audioop import cross
+
 from flask import request, jsonify
-from werkzeug.exceptions import NotFound
+from flask_cors import cross_origin
+from sqlalchemy.exc import NoResultFound
 from werkzeug.routing import ValidationError
 
 from ..middleware.JWT_processor import Token
@@ -10,6 +13,7 @@ from ..origin import (
 from ..settings import ServerSettings
 
 @app.route(ServerSettings.API_PATH+'/gto', methods=['GET'])
+@cross_origin()
 @Token.token_required
 def get_gto(*, _email):
     try:
@@ -31,6 +35,7 @@ def get_gto(*, _email):
 
 
 @app.route(ServerSettings.API_PATH+'/gto', methods=['POST'])
+@cross_origin()
 @Token.token_required
 def post_gto(*, _email):
     try:
@@ -68,6 +73,7 @@ def post_gto(*, _email):
 
 
 @app.route(ServerSettings.API_PATH+'/gto_update', methods=['UPDATE'])
+@cross_origin()
 @Token.token_required
 def update_gto(*, _email):
     try:
@@ -90,7 +96,7 @@ def update_gto(*, _email):
                 "type": f"{e.__class__.__name__}"
             }]
         }), 403
-    except NotFound as e:
+    except NoResultFound as e:
         return jsonify({
             "detail": [{
                 "loc": [

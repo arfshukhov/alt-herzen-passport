@@ -1,14 +1,16 @@
 import traceback
+from audioop import cross
 
 from flask import jsonify
 
 from src.middleware.JWT_processor import Token
 from src.middleware.groups_middleware import GroupsList
-from src.origin import app, request
+from src.origin import app, request, cross_origin
 from src.settings import ServerSettings
 
 
 @app.route(ServerSettings.API_PATH+"/groups", methods=["GET"])
+@cross_origin()
 @Token.token_required
 def get_groups(*, _email):
     try:

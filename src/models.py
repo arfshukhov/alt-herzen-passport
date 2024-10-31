@@ -1,20 +1,12 @@
 from sqlalchemy import create_engine, Column, Integer, Text, Boolean, ForeignKey, Date, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, sessionmaker, Relationship
+from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy.exc import NoResultFound
 from .settings import DBSettings
 
-
-
 Base = declarative_base()
 
-"""
-для локального запуска удобнее исользовать SQLite
-для того, чтобы подключиться к БД Postgres
-в переменной окружения DB_KIND
-должно быть что-то отличное от
-'sqlite'
-"""
+# Настройка подключения к БД
 if DBSettings.DB_KIND == "sqlite":
     engine = create_engine(f"sqlite:///src/{DBSettings.DB_NAME}.db")
 else:
@@ -24,7 +16,16 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 
-# Таблица пользователей
+# Модель Tokens
+class Tokens(Base):
+    __tablename__ = "tokens"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    token = Column(Text, nullable=False)
+    is_active = Column(Boolean, default=True)
+
+
+# Модель Users
 class Users(Base):
     __tablename__ = "users"
 
@@ -36,17 +37,16 @@ class Users(Base):
     is_superuser = Column(Boolean)
 
 
-# Таблица институтов
+# Модель Institutes
 class Institutes(Base):
     __tablename__ = "institutes"
 
     id = Column(Integer, primary_key=True, unique=True)
     name = Column(Text)
     groups = relationship("Groups", order_by="Groups.id", back_populates="institute")
-    students = relationship("Students", order_by="Students.id", back_populates="institute")
 
 
-# Таблица групп
+# Модель Groups
 class Groups(Base):
     __tablename__ = "groups"
 
@@ -58,17 +58,16 @@ class Groups(Base):
     students = relationship("Students", order_by="Students.id", back_populates="group")
 
 
-# Таблица студентов
+# Модель Students
 class Students(Base):
     __tablename__ = "students"
 
     id = Column(Integer, primary_key=True, unique=True)
-    institute_id = Column(Integer, ForeignKey('institutes.id'))
     group_id = Column(Integer, ForeignKey('groups.id'))
     course = Column(Integer)
     first_name = Column(Text)
     last_name = Column(Text)
-    birth_date = Column(Date)
+    birth_date = Column(String)
     birth_place = Column(Text)
     email = Column(Text, unique=True)
     phone_number = Column(Text, unique=True)
@@ -79,12 +78,12 @@ class Students(Base):
     weight = Column(Integer)
     height = Column(Integer)
     patronymic = Column(Text)
-    institute = relationship("Institutes", back_populates="students")
     group = relationship("Groups", back_populates="students")
     results = relationship("StandardResults", order_by="StandardResults.id", back_populates="student")
+    theory_results = relationship("TheoryResults", order_by="TheoryResults.id", back_populates="student")
 
 
-# Таблица GTO
+# Модель GTO
 class BaseGTO(Base):
     __tablename__ = "gto"
 
@@ -93,16 +92,16 @@ class BaseGTO(Base):
     year = Column(Integer)
 
 
-# Таблица нормативов
+# Модель Standard
 class Standard(Base):
     __tablename__ = "standard"
 
     id = Column(Integer, primary_key=True, unique=True)
     name = Column(Text)
-    result = relationship("StandardResults", order_by="StandardResults.id", back_populates="standard")
+    results = relationship("StandardResults", order_by="StandardResults.id", back_populates="standard")
 
 
-# Таблица результатов нормативов
+# Модель StandardResults
 class StandardResults(Base):
     __tablename__ = "standard_results"
 
@@ -115,25 +114,27 @@ class StandardResults(Base):
     standard = relationship("Standard", back_populates="results")
 
 
-# Таблица теории
+# Модель Theory
 class Theory(Base):
     __tablename__ = "theory"
 
     id = Column(Integer, primary_key=True, unique=True)
     name = Column(Text)
-    result = Relationship("TheoryResults", back_populates="theory")
+    results = relationship("TheoryResults", back_populates="theory")
 
 
-# Таблица результатов теории
+# Модель TheoryResults
 class TheoryResults(Base):
     __tablename__ = "theory_results"
 
     id = Column(Integer, primary_key=True, unique=True)
     theory_id = Column(Integer, ForeignKey('theory.id'))
     student_id = Column(Integer, ForeignKey('students.id'))
+    semester = Column(Integer)
     result = Column(Integer)
     theory = relationship("Theory", back_populates="results")
-    student = relationship("Students", back_populates="results")
+    student = relationship("Students", back_populates="theory_results")
+
 
 # Создание всех таблиц
 Base.metadata.create_all(engine)

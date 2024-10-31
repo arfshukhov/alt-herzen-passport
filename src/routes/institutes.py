@@ -1,11 +1,16 @@
+from audioop import cross
+
+
+
 from ..middleware.institute_middleware import InstitutesList
 from ..origin import (
-    app, request, jsonify, traceback
+    app, request, jsonify, traceback, cross_origin
 )
 from ..settings import ServerSettings
 
 
 @app.route(ServerSettings.API_PATH+'/institutes', methods=['GET'])
+@cross_origin
 def get_institutes():
     try:
         skip = int(request.json.get("skip"))

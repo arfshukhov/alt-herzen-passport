@@ -1,56 +1,30 @@
 from audioop import cross
 
-from peewee import IntegrityError
-from werkzeug.routing import ValidationError
-
-from src.settings import ServerSettings
 from ..middleware.JWT_processor import Token
-from ..middleware.students_middleware import StudentsReader, StudentWriter
-from ..origin import *
+from ..origin import app
+
+from ..middleware.standard_middleware import *
+from ..settings import ServerSettings
 
 
-@app.route(ServerSettings.API_PATH+"/students/<int:student_id>", methods=["GET"])
+@app.route(ServerSettings.API_PATH+'/standard', methods=['GET'])
 @cross_origin()
 @Token.token_required
-def get_student(student_id: int, *, _email):
-    try:
-        student_id = int(student_id)
-        student = StudentsReader(_id=student_id).get
-        return jsonify(student), 200
-    except Exception as e:
-        logging.error(e)
-        return jsonify({
-            "detail": [{
-                "loc": [
-                    f"{e.__class__.__name__}",
-                    0
-                ],
-                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
-                       f"{traceback.format_exc()}",
-                "type": f"{e.__class__.__name__}"
-            }]
-        }), 422
+def get_standard(
+        #_email
+):
+    res = StandardReader().get_standard
+    return jsonify(res), 200
 
 
-@app.route(ServerSettings.API_PATH+"/students/", methods=["POST"])
+@app.route(ServerSettings.API_PATH+'/standard', methods=['POST'])
 @cross_origin()
-def write_student():
+@Token.token_required
+def add_standard(_email):
     try:
-        jsn = dict(request.json)
-        query = StudentWriter(data=jsn).write()
-        return jsonify(query), 200
-    except ValidationError as e:
-        return jsonify({
-            "detail": [{
-                "loc": [
-                    f"{e.__class__.__name__}",
-                    0
-                ],
-                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
-                       f"{traceback.format_exc()}",
-                "type": f"{e.__class__.__name__}"
-            }]
-        }), 403
+        name = request.json.get("name")
+        res =StandardWriter(name=name).write_standard()
+        return jsonify(res), 200
     except ValueError as e:
         return jsonify({
             "detail": [{
@@ -63,32 +37,7 @@ def write_student():
                 "type": f"{e.__class__.__name__}"
             }]
         }), 400
-    except KeyError as e:
-        return jsonify({
-            "detail": [{
-                "loc": [
-                    f"{e.__class__.__name__}",
-                    0
-                ],
-                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
-                       f"{traceback.format_exc()}",
-                "type": f"{e.__class__.__name__}"
-            }]
-        }), 404
-    except IntegrityError as e:
-        return jsonify({
-            "detail": [{
-                "loc": [
-                    f"{e.__class__.__name__}",
-                    0
-                ],
-                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
-                       f"{traceback.format_exc()}",
-                "type": f"{e.__class__.__name__}"
-            }]
-        }), 409
     except Exception as e:
-        logging.error(e)
         return jsonify({
             "detail": [{
                 "loc": [
@@ -102,16 +51,14 @@ def write_student():
         }), 422
 
 
-
-@app.route(ServerSettings.API_PATH+"/students/<int:student_id>", methods=["PATCH"])
+@app.route(ServerSettings.API_PATH+'/students/<int:student_id>/standards-results', methods=['GET'])
 @cross_origin()
 @Token.token_required
-def update_student(student_id: int, *, _email):
+def get_standard_results(student_ud, *, _email):
     try:
-        jsn = dict(request.json)
-        query = StudentWriter(_id=student_id, data=jsn).update()
-        return jsonify(query), 200
-    except ValidationError as e:
+        res = StandardReader(student_id=student_ud).get_res
+        return jsonify(res), 200
+    except ValueError as e:
         return jsonify({
             "detail": [{
                 "loc": [
@@ -122,7 +69,36 @@ def update_student(student_id: int, *, _email):
                        f"{traceback.format_exc()}",
                 "type": f"{e.__class__.__name__}"
             }]
-        }), 403
+        }), 404
+    except Exception as e:
+        return jsonify({
+            "detail": [{
+                "loc": [
+                    f"{e.__class__.__name__}",
+                    0
+                ],
+                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
+                       f"{traceback.format_exc()}",
+                "type": f"{e.__class__.__name__}"
+            }]
+        }), 422
+
+
+@app.route(ServerSettings.API_PATH+'/students/<int:student_id>/standards', methods=['POST'])
+@cross_origin()
+@Token.token_required
+def write_result(student_ud, *, _email):
+    try:
+        result = request.json.get('result')
+        semester = request.json.get('semester')
+        standard_id = request.json.get('standard_id')
+        res = StandardWriter(
+        student_id=student_ud,
+        semester=semester,
+        result=result,
+        standard_id=standard_id
+                ).write_result()
+        return jsonify(res), 200
     except ValueError as e:
         return jsonify({
             "detail": [{
@@ -135,7 +111,7 @@ def update_student(student_id: int, *, _email):
                 "type": f"{e.__class__.__name__}"
             }]
         }), 400
-    except KeyError as e:
+    except NoResultFound as e:
         return jsonify({
             "detail": [{
                 "loc": [
@@ -161,14 +137,32 @@ def update_student(student_id: int, *, _email):
         }), 422
 
 
-@app.route(ServerSettings.API_PATH+"/students/<int:student_id>", methods=["DELETE"])
+@app.route(ServerSettings.API_PATH+'/students/<int:student_id>/standards-results/<int:theory_result_id>',
+           methods=['PATCH'])
 @cross_origin()
 @Token.token_required
-def delete_student(student_id: int, *, _email):
+def patch_result(student_ud, theory_result_id, *, _email):
     try:
-        StudentWriter(_id=student_id).delete()
-        return jsonify({"message": "success"}), 200
-    except KeyError as e:
+        result = request.json.get('result')
+        res = StandardWriter(
+            student_id=student_ud,
+            result_id=theory_result_id,
+            result=result
+        ).update_result()
+        return jsonify(res), 200
+    except ValueError as e:
+        return jsonify({
+            "detail": [{
+                "loc": [
+                    f"{e.__class__.__name__}",
+                    0
+                ],
+                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
+                       f"{traceback.format_exc()}",
+                "type": f"{e.__class__.__name__}"
+            }]
+        }), 400
+    except NoResultFound as e:
         return jsonify({
             "detail": [{
                 "loc": [
@@ -192,3 +186,53 @@ def delete_student(student_id: int, *, _email):
                 "type": f"{e.__class__.__name__}"
             }]
         }), 422
+
+
+@app.route(ServerSettings.API_PATH+'/students/<int:student_id>/standards-results/<int:theory_result_id>',
+           methods=['DELETE'])
+@cross_origin()
+@Token.token_required
+def delete_result(student_ud, theory_result_id, *, _email):
+    try:
+        res = StandardWriter(
+            result_id=theory_result_id,
+        ).delete_result()
+        return jsonify({"message":"success"}), 200
+    except ValueError as e:
+        return jsonify({
+            "detail": [{
+                "loc": [
+                    f"{e.__class__.__name__}",
+                    0
+                ],
+                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
+                       f"{traceback.format_exc()}",
+                "type": f"{e.__class__.__name__}"
+            }]
+        }), 400
+    except NoResultFound as e:
+        return jsonify({
+            "detail": [{
+                "loc": [
+                    f"{e.__class__.__name__}",
+                    0
+                ],
+                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
+                       f"{traceback.format_exc()}",
+                "type": f"{e.__class__.__name__}"
+            }]
+        }), 404
+    except Exception as e:
+        return jsonify({
+            "detail": [{
+                "loc": [
+                    f"{e.__class__.__name__}",
+                    0
+                ],
+                "msg": f"{e} {e.__cause__} {e.__doc__} \n "
+                       f"{traceback.format_exc()}",
+                "type": f"{e.__class__.__name__}"
+            }]
+        }), 422
+
+

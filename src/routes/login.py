@@ -9,6 +9,7 @@ from ..origin import *
 
 
 @app.route(ServerSettings.API_PATH+"/login/access-token", methods=["POST"])
+@cross_origin()
 def access_token():
     try:
         email = str(request.args.get("email"))
@@ -45,6 +46,7 @@ def access_token():
 
 
 @app.route(ServerSettings.API_PATH+"/login/test-token", methods=["POST"])
+@cross_origin()
 @Token.token_required
 def test_token(*, _email):
     user = UserReader(email=_email).get
@@ -52,6 +54,7 @@ def test_token(*, _email):
 
 
 @app.route(ServerSettings.API_PATH+"/reset-password/", methods=["POST"])
+@cross_origin()
 def reset_password(*, _email):
     try:
         token = request.json.get("token")
@@ -59,6 +62,7 @@ def reset_password(*, _email):
         verify_password = Token.verify_token(token)
         if verify_password["status"]=="active":
             PasswordManager.update_password(_email, new_password)
+            Token(token=token).deactivate()
             return jsonify({"message": "success"}), 200
         else:
             return jsonify({

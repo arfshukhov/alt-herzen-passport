@@ -8,8 +8,12 @@ from .routes.groups import *
 from .routes.gto import *
 from .routes.students import *
 from .routes.login import *
+from .routes.standard import *
+from .origin import cross_origin
+
 
 @app.route(ServerSettings.API_PATH+"/docs", methods=['GET'])
+@cross_origin()
 def hello_world():  # put application's code here
     return render_template("swaggerui.html")
 

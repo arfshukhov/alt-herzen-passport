@@ -82,7 +82,6 @@ class Date(Validator):
             raise ValidationError(f'Invalid date: {data} date must be in format YYYY-MM-DD')
 
 
-
 class Sex(Validator):
     def __init__(self, sex:str):
         super().__init__(sex)
@@ -174,7 +173,7 @@ class BirthPlace(Validator):
 
     @override
     def validate(self, data: str) -> str:
-        if isinstance(data, str) and not data.isspace():
+        if isinstance(data, str):
             return data
         else:
             raise ValidationError(f'Invalid data: {data}')
